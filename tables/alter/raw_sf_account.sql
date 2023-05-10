@@ -6,4 +6,4 @@ CREATE TABLE IF NOT EXISTS dw_raw.raw_sf_account (
     type character varying(255) ENCODE bytedict,
 ) DISTSTYLE AUTO;
 
-CALL public.sp_add_table_column('dw_raw', 'raw_sf_account', 'channel__c', 'VARCHAR (255)');
+CALL public.sp_add_table_column('dw_raw', 'raw_sf_caccount', 'channel__c', 'VARCHAR (255)');
