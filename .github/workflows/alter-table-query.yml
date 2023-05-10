@@ -21,7 +21,7 @@ jobs:
             echo "${filename}/${filename}_`date +"%Y%m%d_%H%M%S"`.${extension}"
             backup=${filename}/${filename}_`date +"%Y%m%d_%H%M%S"`.${extension}
             backup_dir=$(dirname -- "$i")
-            mkdir -p $backup_dir
+            mkdir -p $backup_dir/$filename
             ls -la */*/*
             mv $i $backup_dir/$backup
           done
