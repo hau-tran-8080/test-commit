@@ -1,5 +1,6 @@
 name: alter-table-query
-on: 
+on:
+  workflow_dispatch:
   push:
     branches: ['main']
     paths: ['tables/alter/*']
@@ -21,6 +22,7 @@ jobs:
             backup=${filename}/${filename}_`date +"%Y%m%d_%H%M%S"`.${extension}
             backup_dir=$(dirname -- "$i")
             mkdir -p $backup_dir
+            ls -la */*/*
             mv $i $backup_dir/$backup
           done
 
