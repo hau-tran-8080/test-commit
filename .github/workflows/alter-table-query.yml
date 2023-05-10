@@ -19,7 +19,9 @@ jobs:
             filename="${filename%.*}"
             echo "${filename}/${filename}_`date +"%Y%m%d_%H%M%S"`.${extension}"
             backup=${filename}/${filename}_`date +"%Y%m%d_%H%M%S"`.${extension}
-            mv $i $backup
+            backup_dir=$(dirname -- "$i")
+            mkdir -p $backup_dir
+            mv $i $backup_dir/$backup
           done
 
           git config user.name github-actions
@@ -28,3 +30,4 @@ jobs:
           git add .
           git commit -m "generated"
           git push
+          
