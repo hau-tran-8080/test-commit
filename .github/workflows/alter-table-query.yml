@@ -1,0 +1,25 @@
+name: alter-table-query
+on: 
+  push:
+    branches: ['main']
+    paths: ['alter_table_query.sql']
+
+permissions:
+  contents: write
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Commit report
+        run: |
+          echo "-- `date`" >> alter_table_query_history.sql
+          cat alter_table_query.sql >> alter_table_query_history.sql
+          > alter_table_query.sql
+
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          
+          git add .
+          git commit -m "generated"
+          git push
