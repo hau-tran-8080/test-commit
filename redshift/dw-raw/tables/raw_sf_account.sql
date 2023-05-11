@@ -217,3 +217,4 @@ CREATE TABLE IF NOT EXISTS dw_raw.raw_sf_account (
 ) DISTSTYLE AUTO;
 
 CALL public.sp_add_table_column('dw_raw', 'raw_sf_account', 'channel__c', 'VARCHAR (255)');
+-- Thu May 11 02:49:10 UTC 2023
