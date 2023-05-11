@@ -1,9 +1,8 @@
 name: alter-table-query
-on:
-  workflow_dispatch:
+on: 
   push:
     branches: ['main']
-    paths: ['tables/alter/*']
+    paths: ['redshift/*/tables-to-be-executed/*']
 
 permissions:
   contents: write
@@ -14,16 +13,13 @@ jobs:
       - uses: actions/checkout@v3
       - name: Commit report
         run: |
-          for i in `find tables/alter -maxdepth 1 -type f`; do 
-            filename=$(basename -- "$i")
-            extension="${filename##*.}"
-            filename="${filename%.*}"
-            echo "${filename}/${filename}_`date +"%Y%m%d_%H%M%S"`.${extension}"
-            backup=${filename}/${filename}_`date +"%Y%m%d_%H%M%S"`.${extension}
-            backup_dir=$(dirname -- "$i")
-            mkdir -p $backup_dir/$filename
-            ls -la */*/*
-            mv $i $backup_dir/$backup
+          for i in `find redshift/*/tables-to-be-executed -maxdepth 1 -type f`; do
+            echo 'terraform apply'
+            table_file="$(dirname $(dirname $i))/tables/$(basename $i)"
+            echo --`date` >> $table_file
+            cat $i >> $table_folder
+            >$i
+            echo 'terraform state rm'
           done
 
           git config user.name github-actions
@@ -32,4 +28,3 @@ jobs:
           git add .
           git commit -m "generated"
           git push
-          
