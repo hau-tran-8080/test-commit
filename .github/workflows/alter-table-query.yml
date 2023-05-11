@@ -16,9 +16,9 @@ jobs:
           for i in `find redshift/*/tables-to-be-executed -maxdepth 1 -type f`; do
             echo 'terraform apply'
             table_file="$(dirname $(dirname $i))/tables/$(basename $i)"
-            echo --`date` >> $table_file
+            echo -e "\n-- $(date)" >> $table_file
             cat $i >> $table_file
-            >$i
+            rm -f $i
             echo 'terraform state rm'
           done
 
