@@ -1,8 +1,9 @@
 name: test-workflow-1
-on: 
+on:
+  workflow_dispatch:
   push:
     branches: ['main']
-    paths: ['redshift/*/*']
+    paths: ['redshift/{dw-raw,dw-risk}/*']
 
 permissions:
   contents: write
@@ -13,7 +14,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Commit report
         run: |
-          for i in `find redshift/* -maxdepth 1 -type f`; do
+          for i in `find redshift/{dw-raw,dw-risk} -maxdepth 1 -type f`; do
             echo 'terraform apply'
             table_file="$(dirname $i)/tables/$(basename $i)"
             echo -e "\n-- $(date)" >> $table_file
