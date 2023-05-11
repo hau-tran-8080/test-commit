@@ -17,7 +17,7 @@ jobs:
             echo 'terraform apply'
             table_file="$(dirname $(dirname $i))/tables/$(basename $i)"
             echo --`date` >> $table_file
-            cat $i >> $table_folder
+            cat $i >> $table_file
             >$i
             echo 'terraform state rm'
           done
