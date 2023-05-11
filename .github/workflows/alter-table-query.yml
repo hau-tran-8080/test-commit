@@ -17,6 +17,7 @@ jobs:
           for i in `find redshift/{dw-raw,dw-risk} -maxdepth 1 -type f`; do
             echo 'terraform apply'
             table_file="$(dirname $i)/tables/$(basename $i)"
+            mkdir -p $(dirname $table_file)
             echo -e "\n-- $(date)" >> $table_file
             cat $i >> $table_file
             rm -f $i
