@@ -15,6 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Commit report
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           for i in `find redshift/{dw-raw,dw-risk} -maxdepth 1 -type f`; do
             echo 'terraform apply'
@@ -29,13 +31,11 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git config pull.rebase true
-          
-          git add .
-          git commit -m "generated"
-          git push
+
           git branch -a
           git fetch
           git branch -a
+          gh pr create -B dev -H main --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
           git checkout dev
           git pull origin main --allow-unrelated-histories
           git push
