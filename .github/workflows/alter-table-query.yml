@@ -31,13 +31,11 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git config pull.rebase true
-          gh pr create -B main -H dev --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
-          git add .
-          git commit -m "generated"
-          git push
+
           git branch -a
           git fetch
           git branch -a
+          gh pr create -B dev -H main --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
           git checkout dev
           git pull origin main --allow-unrelated-histories
           git push
