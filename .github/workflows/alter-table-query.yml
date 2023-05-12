@@ -28,6 +28,10 @@ jobs:
             rm -f $i
             echo 'terraform state rm'
           done
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git config pull.rebase true
+
           git fetch
           git checkout dev
           git pull --tags origin main
