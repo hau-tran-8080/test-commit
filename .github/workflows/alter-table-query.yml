@@ -30,9 +30,12 @@ jobs:
           git config user.email github-actions@github.com
           git config pull.rebase false
           
+          git add .
+          git commit -m "generated"
+          git push
           git branch -a
           git fetch
           git branch -a
           git checkout dev
           git pull origin main --allow-unrelated-histories
-          
+          git push
