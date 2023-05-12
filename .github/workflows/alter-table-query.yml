@@ -28,4 +28,7 @@ jobs:
             rm -f $i
             echo 'terraform state rm'
           done
-          gh repo sync dev --source main
+          git fetch
+          git checkout dev
+          git pull --tags origin main
+          git push
