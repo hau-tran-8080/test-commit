@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Commit report
         env:
-          GH_TOKEN: "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"
+          GH_TOKEN: ${{ github.token }}
         run: |
           for i in `find redshift/{dw-raw,dw-risk} -maxdepth 1 -type f`; do
             echo 'terraform apply'
