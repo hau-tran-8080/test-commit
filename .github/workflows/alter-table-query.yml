@@ -30,6 +30,8 @@ jobs:
           git config user.email github-actions@github.com
           
           git branch -a
+          get fetch origin
+          git branch -a
           git checkout origin/dev
           git pull origin main
           git push
