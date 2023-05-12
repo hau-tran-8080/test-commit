@@ -34,5 +34,5 @@ jobs:
           git fetch
           git branch -a
           git checkout dev
-          git pull origin main
+          git pull origin main --allow-unrelated-histories
           
