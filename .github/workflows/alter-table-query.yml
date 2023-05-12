@@ -33,4 +33,4 @@ jobs:
           git fetch
           git branch -a
           git checkout dev
-          git merge main
+          git rebase main
