@@ -14,25 +14,7 @@ jobs:
   report:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Commit report
+      - name: Dump GitHub context
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          for i in `find redshift/{dw-raw,dw-risk} -maxdepth 1 -type f`; do
-            echo 'terraform apply'
-            table_file="$(dirname $i)/tables/$(basename $i)"
-            mkdir -p $(dirname $table_file)
-            echo -e "\n-- $(date)" >> $table_file
-            cat $i >> $table_file
-            rm -f $i
-            echo 'terraform state rm'
-          done
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git config pull.rebase true
-
-          git fetch
-          git checkout dev
-          git pull --tags origin main
-          git push
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
